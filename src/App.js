@@ -6,6 +6,7 @@ class App extends Component {
 
   state = {
     isFiltered: true,
+    pendingGuest: "",
     guests: [
       {
         name: 'Stefan1',
