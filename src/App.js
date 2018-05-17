@@ -17,11 +17,6 @@ class App extends Component {
         name: 'Stefan2',
         isConfirmed: false,
         isEditing: false
-      },
-      {
-        name: 'Stefan3',
-        isConfirmed: false,
-        isEditing: true
       }
     ]
   }
@@ -44,6 +39,15 @@ class App extends Component {
 
     toggleEditingAt = index =>
       this.toggleGuestPropertyAt("isEditing", index);
+
+    removeGuestAt = index =>
+      this.setState({
+        guests: [
+          ...this.state.guests.slice(0, index),
+          ...this.state.guests.slice(index + 1)
+        ]
+      });
+      // The slice() method returns a shallow copy of a portion of an array into a new array object selected from begin to end (end not included). The original array will not be modified. - MDN (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
 // Sets new name when edited.
   setNameAt = (name, indexToChange) => 
     this.setState({
@@ -132,6 +136,7 @@ class App extends Component {
           toggleEditingAt={this.toggleEditingAt}
           setNameAt={this.setNameAt}
           isFiltered={this.state.isFiltered}
+          removeGuestAt={this.removeGuestAt}
         />
 
       </div>
