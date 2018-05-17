@@ -58,9 +58,11 @@ class App extends Component {
       })
     });
 // Filter confirmed and unconfirmed guests.
-  toggleFilter = (boolean, indexToChange) => {
+  toggleFilter = () => 
     this.setState({ isFiltered: !this.state.isFiltered });
-  }
+// Handles the name submitted into the input field.  
+  handleNameInput = e =>
+    this.setState({ pendingGuest: e.target.value });
 
   getTotalInvited = () => this.state.guests.length;
   // getAttending = () =>
@@ -73,7 +75,11 @@ class App extends Component {
         <h1>RSVP</h1>
         <p>A Treehouse App</p>
         <form>
-            <input type="text" value="Safia" placeholder="Invite Someone" />
+            <input 
+              type="text" 
+              onChange={this.handleNameInput}
+              value={this.state.pendingGuest}
+              placeholder="Invite Someone" />
             <button type="submit" name="submit" value="submit">Submit</button>
         </form>
       </header>
