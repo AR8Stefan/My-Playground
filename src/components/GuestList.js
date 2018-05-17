@@ -5,7 +5,9 @@ import Guest from './Guest';
 
 const GuestList = props => 
 	<ul>
-    {props.guests.map((guest, index) => 
+    {props.guests
+    	.filter(guest => !props.isFiltered || guest.isConfirmed)
+    	.map((guest, index) => 
     	<Guest 
 	    	key={index} 
 	    	name={guest.name} 
@@ -21,7 +23,10 @@ GuestList.PropTypes = {
 	guests: PropTypes.array.isRequired,
 	toggleConfirmationAt: PropTypes.func.isRequired,
 	toggleEditingAt: PropTypes.func.isRequired,
-	setNameAt: PropTypes.func.isRequired
+	setNameAt: PropTypes.func.isRequired,
+	isFiltered: PropTypes.bool.isRequired
 }
 
 export default GuestList;
+
+// If the left of the "||" returns TRUE the expression runs the filter( is true). If the left equals FALSE, the right is then returned instead.
