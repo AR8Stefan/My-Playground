@@ -5,7 +5,7 @@ import GuestList from './components/GuestList';
 class App extends Component {
 
   state = {
-    isFiltered: true,
+    isFiltered: false,
     pendingGuest: "",
     guests: [
       {
@@ -63,6 +63,21 @@ class App extends Component {
 // Handles the name submitted into the input field.  
   handleNameInput = e =>
     this.setState({ pendingGuest: e.target.value });
+// Submits a new guest to the list.
+  newGuestSubmitHandler = e => {
+    e.preventDefault();
+    this.setState({
+      guests: [
+        {
+          name: this.state.pendingGuest,
+          isConfirmed: false,
+          isEditing: false
+        },
+        ...this.state.guests
+      ],
+      pendingGuest: ''
+    })
+  }
 
   getTotalInvited = () => this.state.guests.length;
   // getAttending = () =>
@@ -74,7 +89,7 @@ class App extends Component {
       <header>
         <h1>RSVP</h1>
         <p>A Treehouse App</p>
-        <form>
+        <form onSubmit={this.newGuestSubmitHandler}>
             <input 
               type="text" 
               onChange={this.handleNameInput}
